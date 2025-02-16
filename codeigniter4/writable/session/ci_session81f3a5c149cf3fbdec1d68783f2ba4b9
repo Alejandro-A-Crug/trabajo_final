@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1738319368;_ci_previous_url|s:45:"http://localhost/codeigniter4/public/usuarios";id|s:1:"8";nombre|s:5:"Billy";isLoggedIn|b:1;error|s:33:"Correo o contraseña incorrectos.";__ci_vars|a:2:{s:5:"error";s:3:"old";s:7:"success";s:3:"new";}success|s:26:"Inicio de sesión exitoso.";

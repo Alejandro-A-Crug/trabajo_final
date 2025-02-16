@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1738569033;_ci_previous_url|s:52:"http://localhost/codeigniter4/public/usuarios?page=2";id|s:2:"23";nombre|s:11:"Jaime Rocha";isLoggedIn|b:1;__ci_vars|a:2:{s:5:"error";s:3:"old";s:7:"success";s:3:"new";}error|s:33:"Correo o contraseña incorrectos.";success|s:26:"Inicio de sesión exitoso.";
