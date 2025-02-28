@@ -48,8 +48,8 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="../../demo1/dist/index.html">
-							<img alt="Logo" src="assets/media/logos/logo-1-dark.svg" class="h-25px logo" />
+						<a href="<?= base_url('metronic'); ?>">
+						<img alt="Logo" src="<?= base_url("logos/The Clock_White.png"); ?>" class="h-75px logo" />
 						</a>
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
@@ -348,7 +348,37 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Wrapper-->
 							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
 								<!--begin::Navbar-->
-
+								<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+    <!--begin::Navbar-->
+    						<div class="d-flex align-items-stretch" id="kt_header_nav">
+        						<!--begin::Menu wrapper-->
+        						<div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
+            						<!--begin::Menu-->
+           						 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Timezones</h1>
+           						 <!--end::Title-->
+           						 <!--begin::Separator-->
+           						 <!--end::Menu-->
+        						</div>
+        						<!--end::Menu wrapper-->
+    						</div>
+   							 <!--end::Navbar-->
+    
+    						<!-- Button group aligned to the right -->
+							<?php $session = session(); ?>
+    						 <div class="btn-group ms-auto" role="group" aria-label="Basic outlined example" style="margin-top:10px;">
+        							<a href="<?= base_url('metronic/users/saveuser') ?>"><button type="button" class="btn btn-outline-primary">Sign up</button></a>
+									<?php if ($session->has('id')): ?>
+										<a href="<?= base_url('metronic/logout') ?>">
+        <button type="button" class="btn btn-outline-danger">Log Out</button>
+    </a>
+<?php else: ?>
+    <a href="<?= base_url('metronic/login') ?>">
+        <button type="button" class="btn btn-outline-success">Log In</button>
+    </a>
+								   <?php endif; ?>
+   							 </div>
+    						<!--end::Button group-->
+							</div>
 								<!--end::Navbar-->
 								<!--begin::Topbar-->
 								
@@ -366,75 +396,11 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Container-->
 							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
 								<!--begin::Page title-->
-								<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-									<!--begin::Title-->
-									<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Calendar</h1>
-									<!--end::Title-->
-									<!--begin::Separator-->
-									<span class="h-20px border-gray-200 border-start mx-4"></span>
-									<!--end::Separator-->
-									<!--begin::Breadcrumb-->
-									<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">
-											<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
-										</li>
-										<!--end::Item-->
-										<!--begin::Item-->
-										<li class="breadcrumb-item">
-											<span class="bullet bg-gray-200 w-5px h-2px"></span>
-										</li>
-										<!--end::Item-->
-										<!--begin::Item-->
-										<li class="breadcrumb-item text-dark">Calendar</li>
-										<!--end::Item-->
-									</ul>
-									<!--end::Breadcrumb-->
-								</div>
+								
 								<!--end::Page title-->
 								<!--begin::Actions-->
-								<div>
-									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
-										<!--begin::Menu wrapper-->
-										<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-											<img src="assets/media/avatars/150-26.jpg" alt="user" />
-										</div>
-										<!--begin::Menu-->
-										<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<div class="menu-content d-flex align-items-center px-3">
-													<!--begin::Avatar-->
-													<div class="symbol symbol-50px me-5">
-														<img alt="Logo" src="" />
-													</div>
-													<!--end::Avatar-->
-													<!--begin::Username-->
-													<div class="d-flex flex-column">
-														<div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-														<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-														<a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
-													</div>
-													<!--end::Username-->
-												</div>
-											</div>
-
-
-
-											<div class="menu-item px-5">
-												<a href="../../demo1/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-											</div>
-
-											<div class="menu-item px-5">
-												<a href="../../demo1/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
-											</div>
-
-
-										</div>
-										<!--end::Menu-->
-										<!--end::Menu wrapper-->
-									</div>
-								</div>
+								
+								
 								<!--end::Actions-->
 							</div>
 							<!--end::Container-->
@@ -1852,9 +1818,7 @@ License: For each use you must have a valid license purchased only from above li
 		</div>
 		<!--end::Chat drawer-->
 		<!--begin::Exolore drawer toggle-->
-		<button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0" title="Explore Metronic" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
-			<span id="kt_explore_toggle_label">Explore</span>
-		</button>
+		
 		<!--end::Exolore drawer toggle-->
 		<!--begin::Exolore drawer-->
 		<div id="kt_explore" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">

@@ -120,7 +120,11 @@ License: For each use you must have a valid license purchased only from above li
 								
 						
 								
-
+								<div class="menu-item">
+									<div class="menu-content pb-2">
+										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Management</span>
+									</div>
+								</div>
 								
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
@@ -411,6 +415,21 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Toolbar-->
+						<div class="toolbar" id="kt_toolbar">
+							<!--begin::Container-->
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<!--begin::Page title-->
+								
+								<!--end::Page title-->
+								<!--begin::Actions-->
+								
+								
+								<!--end::Actions-->
+							</div>
+							<!--end::Container-->
+						</div>
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
 						
 						<!--end::Toolbar-->
 						<!--begin::Post-->
@@ -540,11 +559,7 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Table head-->
 											<thead>
     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-	<th class="min-w-125px">
-    <a href="<?= base_url('metronic/timezone?' . http_build_query(array_merge($request, ['orderBy' => 'id', 'orderDirection' => ($orderBy === 'id' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
-        ID <?= $orderBy === 'id' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
-    </a>
-</th>
+
 <th class="min-w-125px">
     <a href="<?= base_url('metronic/timezone?' . http_build_query(array_merge($request, ['orderBy' => 'Year', 'orderDirection' => ($orderBy === 'Year' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
         Year <?= $orderBy === 'Year' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
@@ -567,24 +582,32 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Table body-->
 											<tbody class="fw-bold text-gray-600">
 												<?php foreach($ages as $age): ?>
-													<tr <?= $age['Deletion_Date'] ? 'style="background-color: #bb3c36; color: white;"' : '' ?>>
+													<tr>
 													<!--begin::Checkbox-->
-													<td>
-														<?= $age['id'] ?>
-													</td>
+
 													<!--end::Checkbox-->
 													<!--begin::Name=-->
 													<td>
-														<?= $age['Year'] ?>
+													<a href="#" class="text-gray-800  mb-1" 
+   													style="<?= $age['Deletion_Date'] ? 'font-weight: bold;' : '' ?>">
+   													<?= $age['Deletion_Date'] ? '[REDACTED]' : $age['Year'] ?>
+													</a>
 													</td>
 													<!--end::Name=-->
 													<!--begin::Email=-->
 													<td>
-													<?= $age['Age'] ?>
+													<p class="text-gray-800  mb-1" 
+   													style="<?= $age['Deletion_Date'] ? 'font-weight: bold;' : '' ?>">
+   													<?= $age['Deletion_Date'] ? '[REDACTED]' : $age['Age'] ?>
+													</p>
 													</td>
 
 													<td>
-													<?= $age['Significant_Event'] ?>
+													<p class="text-gray-800  mb-1" 
+   													style="<?= $age['Deletion_Date'] ? 'font-weight: bold;' : '' ?>">
+   													<?= $age['Deletion_Date'] ? '[REDACTED]' : $age['Significant_Event'] ?>
+													</p>
+													
 													</td>
 
 													
@@ -634,9 +657,9 @@ License: For each use you must have a valid license purchased only from above li
 										</table>
 											<!--AQUÍ ESTA TU TABLA-->
 										<!--end::Table-->
-										<div class="mt-4">
-												<?=$pager->links('default','custom_pagination') ?>
-											</div>
+										<div class="mt-4 d-flex justify-content-end">
+    									<?= $pager->links('default', 'custom_pagination') ?>
+										</div>
 									</div>
 									<!--end::Card body-->
 								</div>

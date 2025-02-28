@@ -39,6 +39,18 @@ class RoleController extends BaseController {
         helper(['form', 'url']);
         $data['role'] = $id ? $roleModel->find($id) : null;
 
+        if($id){
+            $role = $roleModel->find($id);
+
+            if($role && $role['Deletion_Date']){
+                return redirect()->to("/metronic/roles")->with("error", "Cannot edit a deleted role.");
+            }
+
+            $data['role'] = $role;
+        } else {
+            $data['role'] = null;
+        }
+
         // Load the selected language from POST data
         $language = $this->request->getPost('language') ?? 'en'; // Default to English
         $this->setLanguage($language);
@@ -74,13 +86,19 @@ class RoleController extends BaseController {
     public function deleteRole($id) {
         $roleModel = new RoleModel();
 
+        $role = $roleModel->find($id);
+
+        if(!$role){
+            return redirect()->to('/metronic/roles')->with('error', 'Role not found.');
+        }
+
         $roleData = [
-            'Deletion_Date' => date('Y-m-d H:i:s')
+            'Deletion_Date' =>$role['Deletion_Date'] ? NULL : date('Y-m-d H:i:s')
         ];
 
         $roleModel->update($id, $roleData);
 
-        return redirect()->to('/metronic/roles')->with('success', lang('Messages.role_archived')); // Use language file for messages
+        return redirect()->to('/metronic/roles')->with('success', $role['Deletion_Date'] ? 'Role restored successfully' : 'Role archived successfully'); // Use language file for messages
     }
 
     private function setLanguage($language) {

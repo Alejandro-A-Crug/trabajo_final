@@ -115,7 +115,11 @@ License: For each use you must have a valid license purchased only from above li
 									</a>
 								</div>
 								
-								
+								<div class="menu-item">
+									<div class="menu-content pb-2">
+										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Management</span>
+									</div>
+								</div>
 						
 								
 
@@ -408,6 +412,36 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Content-->
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Toolbar-->
+						<div class="toolbar" id="kt_toolbar">
+							<!--begin::Container-->
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<!--begin::Page title-->
+								
+								<!--end::Page title-->
+								<!--begin::Actions-->
+								
+								
+								<!--end::Actions-->
+							</div>
+							<!--end::Container-->
+						</div>
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
+						<div class="toolbar" id="kt_toolbar">
+							<!--begin::Container-->
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<!--begin::Page title-->
+								
+								<!--end::Page title-->
+								<!--begin::Actions-->
+								
+								
+								<!--end::Actions-->
+							</div>
+							<!--end::Container-->
+						</div>
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
 						
 						<!--end::Toolbar-->
 						<!--begin::Post-->
@@ -566,11 +600,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Table row-->
 												<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 
-												<th class="min-w-125px">
-    <a href="<?= base_url('metronic/news?' . http_build_query(array_merge($request, ['orderBy' => 'id', 'orderDirection' => ($orderBy === 'id' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
-        Id <?= $orderBy === 'id' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
-    </a>
-</th>
+												
 <th class="min-w-125px">
     <a href="<?= base_url('metronic/news?' . http_build_query(array_merge($request, ['orderBy' => 'Title', 'orderDirection' => ($orderBy === 'Title' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
         Title <?= $orderBy === 'Title' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
@@ -587,7 +617,7 @@ License: For each use you must have a valid license purchased only from above li
     </a>
 </th>
 
-													<th class="text-end min-w-70px">Actions</th>
+<th class="text-end min-w-70px">Actions</th>
 												</tr>
 												<!--end::Table row-->
 											</thead>
@@ -595,23 +625,28 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Table body-->
 											<tbody class="fw-bold text-gray-600">
 											<?php foreach ($news as $new): ?>
-												<tr <?= $new['Deletion_Time'] ? 'style="background-color: #bb3c36; color: white;"' : '' ?>>
+												<tr>
 													<!--begin::Checkbox-->
 
 													<!--end::Checkbox-->
 													<!--begin::Name=-->
-													<td>
-													<?=$new['id']?>
-													</td>
+												
 													<!--end::Name=-->
 													<!--begin::Email=-->
 													<td>
-													<?=$new['Title']?>
-													</td>
+			<p class="text-gray-800  mb-1" 
+   			style="<?= $new['Deletion_Time'] ? 'font-weight: bold;' : '' ?>">
+   			<?= $new['Deletion_Time'] ? '[REDACTED]' : $new['Title'] ?>
+			</p>
+			</td>
 													<!--end::Email=-->
 													<!--begin::Company=-->
 													<td>
-													<?=$new['Year']?>
+													<p class="text-gray-800  mb-1" 
+   													style="<?= $new['Deletion_Time'] ? 'font-weight: bold;' : '' ?>">
+   													<?= $new['Deletion_Time'] ? '[REDACTED]' : $new['Year'] ?>
+													</p>
+													</td>
 													</td>
 													<!--end::Company=-->
 													<!--begin::Payment method=-->
@@ -623,6 +658,8 @@ License: For each use you must have a valid license purchased only from above li
 													
 													<!--end::Date=-->
 													<!--begin::Action=-->
+													
+														
 													<td class="text-end">
 														<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
 														<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
@@ -636,19 +673,26 @@ License: For each use you must have a valid license purchased only from above li
 														<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 															<!--begin::Menu item-->
 															<div class="menu-item px-3">
-																<a href="<?= base_url('metronic/news/save/' . $new['id']) ?>" class="menu-link px-3 bg-warning">Edit</a>
+																<a href="<?= base_url('metronic/news/save/' . $new['id']) ?>" class="menu-link px-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+  																<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
+																</svg></a>
 															</div>
 															<!--end::Menu item-->
 															<!--begin::Menu item-->
 															<div class="menu-item px-3">
-																<a href="<?= base_url('metronic/news/delete/' . $new['id']) ?>" class="menu-link px-3 bg-danger" data-kt-customer-table-filter="delete_row">Delete</a>
+																<a href="<?= base_url('metronic/news/delete/' . $new['id']) ?>" class="menu-link px-3" data-kt-customer-table-filter="delete_row"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+																<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+																</svg></a>
 															</div>
 															<!--end::Menu item-->
 														</div>
 														<!--end::Menu-->
 													</td>
+														
+													</td>
 													<!--end::Action=-->
 												</tr>
+								
 												<?php endforeach; ?>
 												
 												

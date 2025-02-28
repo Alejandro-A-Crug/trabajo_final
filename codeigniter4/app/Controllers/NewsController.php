@@ -36,6 +36,17 @@ class NewsController extends BaseController {
         helper(['form', 'url']);
         $data['new'] = $id ? $newsModel->find($id) : null;
 
+        if($id){
+            $new = $newsModel->find($id);
+
+            if($new && $new['Deletion_Time']){
+                return redirect()->to("/metronic/news")->with("error", "Cannot edit a deleted article.");
+            }
+            $data['new'] = $new;
+            } else {
+                $data['new'] = null;
+            }
+
         // Load the selected language from POST data
         $language = $this->request->getPost('language') ?? 'en'; // Default to English
         $this->setLanguage($language);
@@ -73,13 +84,19 @@ class NewsController extends BaseController {
     public function deleteNews($id) {
         $newsModel = new NewsModel();
 
+        $new = $newsModel->find($id);
+
+        if(!$new){
+            return redirect()->to('metronic/news')->with('error', 'News not found');
+        }
+
         $newsData = [
-            'Deletion_Time' => date('Y-m-d H:i:s')
+            'Deletion_Time' => $new['Deletion_Time'] ? NULL : date('Y-m-d H:i:s')
         ];
 
         $newsModel->update($id, $newsData);
 
-        return redirect()->to('/metronic/news')->with('success', lang('Messages.news_archived')); // Use language file for messages
+        return redirect()->to('/metronic/news')->with('success', $new['Deletion_Time'] ? 'News restored successfully' : 'News archived successfully'); // Use language file for messages
     }
 
     private function setLanguage($language) {

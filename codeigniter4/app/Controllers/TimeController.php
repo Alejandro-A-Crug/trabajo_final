@@ -49,10 +49,24 @@ class TimeController extends BaseController
         
         $timeModel = new TimeModel();
         $data['age'] = $id ? $timeModel->find($id) : null;
+        helper(['form', 'url']);
 
+        if($id){
+            $timezone = $timeModel ->find($id);
+
+            if($timezone && $timezone['Deletion_Date']){
+                return redirect()->to("/metronic/timezone")->with("error", "Cannot edit a deleted timezone.");
+            }
+
+            $data['age'] = $timezone;
+        } else {
+            $data['age'] = null;
+        }
         // Load the selected language from POST data
         $language = $this->request->getPost('language') ?? 'en'; // Default to English
         $this->setLanguage($language);
+
+
 
         if ($this->request->getMethod() == 'POST') {
             // Validation
@@ -92,13 +106,19 @@ class TimeController extends BaseController
     public function deleteAge($id) {
         $timeModel = new TimeModel();
 
+        $age = $timeModel->find($id);
+
+        if (!$age) {
+            return redirect()->to('/metronic/timezone')->with('error', 'Time not found.');
+        }
+
         $ageData = [
-            'Deletion_Date' => date('Y-m-d H:i:s')
+            'Deletion_Date' => $age['Deletion_Date'] ? NULL : date('Y-m-d H:i:s')
         ];
 
         $timeModel->update($id, $ageData);
 
-        return redirect()->to('/metronic/timezone')->with('success', lang('Messages.timezone_deleted')); // Use language file for messages
+        return redirect()->to('/metronic/timezone')->with('success', $age['Deletion_Date'] ?'Timezone archived successfully' : 'Timezone restoredsuccessfully'); // Use language file for messages
     }
 
     private function setLanguage($language)

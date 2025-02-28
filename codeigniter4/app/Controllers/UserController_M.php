@@ -61,14 +61,28 @@ public function displayUser(){
      *
      * @param int|null $id 
      * @return \CodeIgniter\HTTP\RedirectResponse|string
-     */public function saveUser ($id = null)
+     */public function saveUser($id = null)
 {
     $userModel = new UserModel();
     $roleModel = new RoleModel();
     helper(['form', 'url']);
+
     $roles = $roleModel->findAll();
     $data['roles'] = $roles;
-    $data['user'] = $id ? $userModel->find($id) : null;
+    
+    // Fetch the user if an ID is provided
+    if ($id) {
+        $user = $userModel->find($id);
+
+        // Check if the user is deleted
+        if ($user && $user['borrado_en']) {
+            return redirect()->to("/metronic/userlist")->with("error", "Cannot edit a deleted user.");
+        }
+
+        $data['user'] = $user;
+    } else {
+        $data['user'] = null;
+    }
 
     // Load the selected language from POST data
     $language = $this->request->getPost('language') ?? 'en'; // Default to English
@@ -87,30 +101,29 @@ public function displayUser(){
         if (!$validation->withRequest($this->request)->run()) {
             $data['validation'] = $validation;
         } else {
-        $userData = [
-            'nombre' => $this->request->getPost('name'),
-            'epoca' => $this->request->getPost('year'),
-            'contraseña' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'rol' => $this->request->getPost('role'), // Get the selected role
-            'borrado_en' => NULL
-            
-        ];
+            $userData = [
+                'nombre' => $this->request->getPost('name'),
+                'epoca' => $this->request->getPost('year'),
+                'contraseña' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'rol' => $this->request->getPost('role'), // Get the selected role
+                'borrado_en' => NULL
+            ];
 
-        if($id) {
-            $userModel->update($id, $userData);
-            $message = "User updated correctly";
-        } else {
-            $userModel->save($userData);
-            $message = "User created correctly";
+            if ($id) {
+                $userModel->update($id, $userData);
+                $message = "User updated correctly";
+            } else {
+                $userModel->save($userData);
+                $message = "User created correctly";
+            }
+
+            return redirect()->to("/metronic/userlist")->with("success", $message);
         }
-
-        return redirect()->to("/metronic/userlist")->with("success", $message);
     }
 
+    return view('sign-up', $data);
 }
-return view('sign-up', $data);
 
-}
 
 private function setLanguage($language)
 {
@@ -129,15 +142,23 @@ private function setLanguage($language)
 public function deleteUser($id){
     $userModel = new UserModel();
 
+    // Obtener el usuario actual
+    $user = $userModel->find($id);
+
+    if (!$user) {
+        return redirect()->to('/metronic/userlist')->with('error', 'User not found.');
+    }
+
+    // Si el usuario está eliminado, restaurarlo. Si no, archivarlo.
     $userData = [
-        'borrado_en' => date('Y-m-d H:i:s')
+        'borrado_en' => $user['borrado_en'] ? NULL : date('Y-m-d H:i:s')
     ];
 
     $userModel->update($id, $userData);
 
-    return redirect()->to('/metronic/userlist')->with('success','User archived succesfully');
-
+    return redirect()->to('/metronic/userlist')->with('success', $user['borrado_en'] ? 'User restored successfully' : 'User archived successfully');
 }
+
 
 
 /**

@@ -117,7 +117,11 @@ License: For each use you must have a valid license purchased only from above li
 								
 								
 						
-								
+								<div class="menu-item">
+									<div class="menu-content pb-2">
+										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Management</span>
+									</div>
+								</div>
 
 								
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -397,6 +401,7 @@ License: For each use you must have a valid license purchased only from above li
 								   <?php endif; ?>
    							 </div>
     						<!--end::Button group-->
+							
 							</div>
 							<!--end::Wrapper-->
 						</div>
@@ -405,6 +410,21 @@ License: For each use you must have a valid license purchased only from above li
 					<!--end::Header-->
 					<!--end::Header-->
 					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
+						<div class="toolbar" id="kt_toolbar">
+							<!--begin::Container-->
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<!--begin::Page title-->
+								
+								<!--end::Page title-->
+								<!--begin::Actions-->
+								
+								
+								<!--end::Actions-->
+							</div>
+							<!--end::Container-->
+						</div>
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Toolbar-->
 						
@@ -541,9 +561,25 @@ License: For each use you must have a valid license purchased only from above li
     </thead>
     <tbody class="fw-bold text-gray-600">
         <?php foreach ($roles as $role): ?>
-			<tr <?= $role['Deletion_Date'] ? 'style="background-color: #bb3c36; color: white;"' : '' ?>>
-            <td><?= esc($role['Name']) ?></td>
-            <td><?= esc($role['Privileges']) ?></td>
+			<tr>
+
+
+           
+			<td>
+			<p class="text-gray-800  mb-1" 
+   			style="<?= $role['Deletion_Date'] ? 'font-weight: bold;' : '' ?>">
+   			<?= $role['Deletion_Date'] ? '[REDACTED]' : $role['Name'] ?>
+			</p>
+			</td>
+
+
+
+			<td>
+			<p class="text-gray-800  mb-1" 
+   			style="<?= $role['Deletion_Date'] ? 'font-weight: bold;' : '' ?>">
+   			<?= $role['Deletion_Date'] ? '[REDACTED]' : $role['Privileges'] ?>
+			</p>
+			</td>
 
 			<td class="text-end">
 						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -576,9 +612,11 @@ License: For each use you must have a valid license purchased only from above li
         <?php endforeach; ?>
     </tbody>
 </table>
-<div class="mt-4">
+<div class="mt-4 d-flex justify-content-end">
     <?= $pager->links('default', 'custom_pagination') ?>
 </div>
+
+
 									<!--end::Card body-->
 								</div>
 								<!--end::Card-->

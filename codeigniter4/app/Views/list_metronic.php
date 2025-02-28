@@ -129,7 +129,11 @@ License: For each use you must have a valid license purchased only from above li
 									</a>
 								</div>
 								
-								
+								<div class="menu-item">
+									<div class="menu-content pb-2">
+										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Management</span>
+									</div>
+								</div>
 						
 								
 
@@ -383,7 +387,7 @@ License: For each use you must have a valid license purchased only from above li
 							<!--end::Mobile logo-->
 							<!--begin::Wrapper-->
 							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-    <!--begin::Navbar-->
+    						<!--begin::Navbar-->
     						<div class="d-flex align-items-stretch" id="kt_header_nav">
         						<!--begin::Menu wrapper-->
         						<div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
@@ -419,6 +423,21 @@ License: For each use you must have a valid license purchased only from above li
 					</div>
 					<!--end::Header-->
 					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
+						<div class="toolbar" id="kt_toolbar">
+							<!--begin::Container-->
+							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+								<!--begin::Page title-->
+								
+								<!--end::Page title-->
+								<!--begin::Actions-->
+								
+								
+								<!--end::Actions-->
+							</div>
+							<!--end::Container-->
+						</div>
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Toolbar-->
 						
@@ -535,11 +554,7 @@ License: For each use you must have a valid license purchased only from above li
         Name <?= $orderBy === 'nombre' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
     </a>
 </th>
-<th class="min-w-125px">
-    <a href="<?= base_url('metronic/userlist?' . http_build_query(array_merge($request, ['orderBy' => 'id', 'orderDirection' => ($orderBy === 'id' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
-        ID <?= $orderBy === 'id' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
-    </a>
-</th>
+
 <th class="min-w-125px">
     <a href="<?= base_url('metronic/userlist?' . http_build_query(array_merge($request, ['orderBy' => 'epoca', 'orderDirection' => ($orderBy === 'epoca' && $orderDirection === 'asc' ? 'desc' : 'asc')]))) ?>">
         Timezone <?= $orderBy === 'epoca' ? ($orderDirection === 'asc' ? '↑' : '↓') : '' ?>
@@ -560,24 +575,38 @@ License: For each use you must have a valid license purchased only from above li
 											
 											<tbody class="fw-bold text-gray-600">
 											<?php foreach ($users as $user): ?>
-												<tr <?= $user['borrado_en'] ? 'style="background-color: #bb3c36; color: white;"' : '' ?>>
+												<tr>
 
 													<!--end::Checkbox-->
+													
 													<!--begin::Name=-->
 													<td>
-														<a href="#" class="text-gray-800 text-hover-primary mb-1"><?=($user['nombre']) ?></a>
+													<a href="#" class="text-gray-800 text-hover-primary mb-1" 
+   													style="<?= $user['borrado_en'] ? 'font-weight: bold;' : '' ?>">
+   													<?= $user['borrado_en'] ? '[REDACTED]' : $user['nombre'] ?>
+													</a>
+
+
 													</td>
 													<!--end::Name=-->
 													<!--begin::Id=-->
 													<td>
-														<a href="#" class="text-gray-600 text-hover-primary mb-1"><?=($user['id']) ?></a>
+													<p class="text-gray-800  mb-1" 
+   													style="<?= $user['borrado_en'] ? ' font-weight: bold;' : '' ?>">
+   													<?= $user['borrado_en'] ? '[REDACTED]' : $user['epoca'] ?>
+													</p>
 													</td>
 													<!--end::Id=-->
 													<!--begin::Company=-->
-													<td><?=($user['epoca']) ?></td>
+													<td>
+													<p class="text-gray-800  mb-1" 
+   													style="<?= $user['borrado_en'] ? ' font-weight: bold;' : '' ?>">
+   													<?= $user['borrado_en'] ? '[REDACTED]' : $user['rol'] ?>
+													</p>
+													</td>
 													<!--end::Company=-->
 													<!--begin::Payment method=-->
-													<td><?=($user['rol']) ?></td>
+													
 													<!--end::Payment method=-->
 													<!--begin::Date=-->
 												
@@ -629,8 +658,8 @@ License: For each use you must have a valid license purchased only from above li
 											</tbody>
 											<!--end::Table body-->
 										</table>
-										<div class="mt-4">
-											<?= $pager->links('default','custom_pagination') ?>
+										<div class="mt-4 d-flex justify-content-end">
+    										<?= $pager->links('default', 'custom_pagination') ?>
 										</div>
 										<!--end::Table-->
 										<?php else: ?>

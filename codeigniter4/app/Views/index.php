@@ -120,7 +120,11 @@ License: For each use you must have a valid license purchased only from above li
 									</a>
 								</div>
 								
-								
+								<div class="menu-item">
+									<div class="menu-content pb-2">
+										<span class="menu-section text-muted text-uppercase fs-8 ls-1">Management</span>
+									</div>
+								</div>
 						
 								
 
@@ -813,8 +817,8 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="flex-grow-1 card-p pb-0">
 													<div class="d-flex flex-stack flex-wrap">
 														<div class="me-2">
-															<a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Generate Reports</a>
-															<div class="text-muted fs-7 fw-bold">Finance and accounting reports</div>
+															<a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Most succesful Journalists</a>
+															<div class="text-muted fs-7 fw-bold">Based on number of news Created</div>
 														</div>
 														<div class="fw-bolder fs-3 text-primary">$24,500</div>
 													</div>
@@ -835,10 +839,10 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Hidden-->
 												<div class="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
 													<div class="me-2">
-														<span class="fw-bolder text-gray-800 d-block fs-3">Sales</span>
-														<span class="text-gray-400 fw-bold">Oct 8 - Oct 26 21</span>
+														<span class="fw-bolder text-gray-800 d-block fs-3">News sold</span>
+														<span class="text-gray-400 fw-bold">January to June</span>
 													</div>
-													<div class="fw-bolder fs-3 text-primary">$15,300</div>
+													<div class="fw-bolder fs-3 text-primary">Mostly success</div>
 												</div>
 												<!--end::Hidden-->
 												<!--begin::Chart-->
@@ -857,7 +861,7 @@ License: For each use you must have a valid license purchased only from above li
 						
 									<!--end::Col-->
 									<!--begin::Col-->
-ç
+<br>
 									<!--end::Col-->
 								</div>
 								<!--end::Row-->
@@ -872,8 +876,8 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Header-->
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Trends</span>
-            <span class="text-muted fw-bold fs-7">Latest trends</span>
+            <span class="card-label fw-bolder fs-3 mb-1">Deaths by Anomaly</span>
+            <span class="text-muted fw-bold fs-7">Journalists and other members of the crew</span>
         </h3>
     </div>
     <!--end::Header-->
@@ -904,7 +908,7 @@ License: For each use you must have a valid license purchased only from above li
 												<span class="text-muted mt-1 fw-bold fs-7">Preview monthly events</span>
 											</h3>
 											<div class="card-toolbar">
-												<a href="../../demo1/dist/apps/calendar.html" class="btn btn-primary">Manage Calendar</a>
+												<a href="<?= base_url('calendar'); ?>" class="btn btn-primary">Manage Calendar</a>
 											</div>
 										</div>
 										<!--end::Card header-->
@@ -4397,12 +4401,12 @@ License: For each use you must have a valid license purchased only from above li
 			document.addEventListener("DOMContentLoaded", function () {
 				// Line Chart
 				var options1 = {
-					series: [42, 47, 52, 58, 65],
+					series: [20, 15 , 10, 7, 16],
           			chart: {
           			width: 380,
           			type: 'polarArea'
         			},
-        			labels: ['Rose A', 'Rose B', 'Rose C', 'Rose D', 'Rose E'],
+        			labels: ['Alex A', 'Brithanny B', 'Carmen C', 'Manuel G', 'Antonio JDT'],
         			fill: {
         			  opacity: 1
         			},
@@ -4439,7 +4443,7 @@ License: For each use you must have a valid license purchased only from above li
 				// Bar Chart
 				var options2 = {
 					chart: { type: "bar", height: 150, toolbar: { show: false } },
-					series: [{ name: "Expenses", data: [8, 14, 11, 18, 21, 19] }],
+					series: [{ name: "Expenses", data: [0, 2, 5, 1, 6, 2] }],
 					xaxis: { categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"] },
 					colors: ["#f1416c"]
 				};
@@ -4452,11 +4456,11 @@ License: For each use you must have a valid license purchased only from above li
                 height: 350
             },
             series: [{
-                name: 'Ventas',
-                data: [10, 20, 30, 25, 15, 40, 35]
+                name: 'Newspapers sold',
+                data: [6, 15, 10, 25, 11, 30, 26]
             }],
             xaxis: {
-                categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio']
+                categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
             }
         };
 				new ApexCharts(document.querySelector("#chart3"), options3).render();
